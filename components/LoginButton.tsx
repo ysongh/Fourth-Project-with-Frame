@@ -3,7 +3,9 @@
 import { usePrivy } from '@privy-io/react-auth'
 
 export default function LoginButton() {
-  const { login, ready, authenticated, user  } = usePrivy()
+  const { login, logout, ready, authenticated, user  } = usePrivy()
+
+  const disableLogout = !ready || (ready && !authenticated)
 
   return (
     <>
@@ -14,7 +16,14 @@ export default function LoginButton() {
           Log in
         </button>
       )}
-      {ready && authenticated && <p>User {user?.id} is logged in.</p>}
+      {ready && authenticated && (
+        <>
+          <p>User {user?.id} is logged in.</p>
+          <button disabled={disableLogout} onClick={logout}>
+            Log out
+          </button>
+        </>
+      )}
     </>
   )
 }
