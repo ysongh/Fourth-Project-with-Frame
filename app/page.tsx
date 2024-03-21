@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 
 import styles from './page.module.css'
-import LoginButton from '@/components/LoginButton'
+import PrivySection from '@/components/PrivySection'
 
 export async function generateMetadata(): Promise<Metadata> {
   const frameTags = await getFrameMetadata(
@@ -62,7 +62,7 @@ export default function Home() {
           </a>
         </div>
       </div>
-      <LoginButton />
+      <PrivySection />
     </main>
   )
 }
