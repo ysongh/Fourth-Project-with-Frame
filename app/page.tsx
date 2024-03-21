@@ -33,6 +33,16 @@ export default function Home() {
             </a>{' '}
             for your frame endpoint.
           </p>
+          <p>
+            Go to{' '}
+            <a
+              href="https://fourth-project-with-frame.onrender.com/api/"
+              style={{ display: 'inline', fontWeight: 'semibold' }}
+            >
+              <code className={styles.code}>fourth-project-with-frame.onrender.com/api/</code>
+            </a>{' '}
+            to run your frame.
+          </p>
         </div>
         <div>
           <a
