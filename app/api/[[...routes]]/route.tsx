@@ -4,11 +4,18 @@ import { Button, Frog, TextInput } from 'frog'
 // import { neynar } from 'frog/hubs'
 import { handle } from 'frog/next'
 
-const app = new Frog({
+type State = {
+  items: string[]
+}
+
+const app = new Frog<{State: State}>({
   assetsPath: '/',
   basePath: '/api',
   // Supply a Hub to enable frame verification.
   // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
+  initialState: {
+    items: []
+  },
 })
 
 // Uncomment to use Edge Runtime
@@ -61,6 +68,29 @@ app.frame('/', (c) => {
       <Button value="bananas">Bananas</Button>,
       status === 'response' && <Button.Reset>Reset</Button.Reset>,
     ],
+  })
+})
+
+app.frame('/items', (c) => {
+  const { inputText, deriveState } = c
+
+  const state = deriveState(previousState => {
+    previousState.items.push(inputText || "")
+  })
+
+  return c.res({
+    image: (
+      <div style={{ color: 'black', display: 'flex', flexDirection: 'column', fontSize: 20 }}>
+        <h1>List of Items</h1>
+        {state.items.map(n => (
+          <p key={n}>{n}</p>
+        ))}
+      </div>
+    ),
+    intents: [
+      <TextInput placeholder="Enter item name..." />,
+      <Button>Add</Button>,
+    ]
   })
 })
 
