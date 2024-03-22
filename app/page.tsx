@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import styles from './page.module.css'
 import PrivySection from '@/components/PrivySection'
+import DynamicSection from '@/components/DynamicSection'
 
 export async function generateMetadata(): Promise<Metadata> {
   const frameTags = await getFrameMetadata(
@@ -63,6 +64,7 @@ export default function Home() {
         </div>
       </div>
       <PrivySection />
+      <DynamicSection />
     </main>
   )
 }
